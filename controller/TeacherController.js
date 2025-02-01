@@ -35,6 +35,7 @@ const teacherLogin = async (req, res) => { // Changed from studentLogin to teach
         if (!isPasswordCorrect) {
             return res.status(400).json({ message: "Invalid password" });
         }
+        const token = jwt.sign({ teacherId: user._id },secretKey,{ expiresIn: "1h" });
         res.status(200).json({ token, message: "Login successful" });
     } catch (error) {
         console.error("Error logging in user:", error);

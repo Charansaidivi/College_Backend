@@ -40,4 +40,15 @@ const studentLogin = async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 }
-module.exports = { studentRegister, studentLogin };
+
+const allStudents = async (req, res) => {
+    try {
+        const students = await Student.find(); // Fetch all students from the database
+        res.status(200).json(students); // Return the list of students
+    } catch (error) {
+        console.error("Error fetching students:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+module.exports = { studentRegister, studentLogin, allStudents };
