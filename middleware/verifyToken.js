@@ -14,8 +14,6 @@ const verifyToken = async (req, res, next) => {
   
     try {
       const decoded = jwt.verify(token, secretKey);
-      console.log("Decoded token:", decoded);
-      
       const teacher = await Teacher.findById(decoded.teacherId);
       console.log("Found teacher:", teacher);
       
@@ -25,8 +23,8 @@ const verifyToken = async (req, res, next) => {
       }
       
       req.teacherId = teacher._id;
-      req.teacher = teacher;
-      console.log("Setting userId:", req.userId);
+      // req.teacher = teacher;
+      console.log("Setting teacherId:", req.teacherId);
       console.log("Middleware completed successfully");
       next();
     } catch (error) {
